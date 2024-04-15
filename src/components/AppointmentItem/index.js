@@ -1,37 +1,32 @@
-// Write your code here
-import {format} from 'date-fns'
 import './index.css'
 
-const AppointmentItem = props => {
-  const {eachAppItem, isToggleStar} = props
-  const {id, title, date, isStared} = eachAppItem
-
-  const toggleStar = () => {
-    isToggleStar(id)
-  }
-
-  const starImgUrl = isStared
+const AppointmentIem = props => {
+  const {appointmentDetails, toggleIsStarred} = props
+  const {id, title, date, isStarred} = appointmentDetails
+  const starImgUrl = isStarred
     ? 'https://assets.ccbp.in/frontend/react-js/appointments-app/filled-star-img.png'
     : 'https://assets.ccbp.in/frontend/react-js/appointments-app/star-img.png'
 
+  const onClickStar = () => {
+    toggleIsStarred(id)
+  }
+
   return (
-    <li className="item-container">
-      <div className="item-top-section">
-        <p className="item-name">{title}</p>
+    <li className="appointment-item">
+      <div className="header-container">
+        <p className="title">{title}</p>
         <button
           type="button"
-          className="star-button"
           data-testid="star"
-          onClick={toggleStar}
+          className="star-button"
+          onClick={onClickStar}
         >
-          <img src={starImgUrl} alt="star" className="starImage" />
+          <img src={starImgUrl} className="star" alt="star" />
         </button>
       </div>
-      <p className="date-format">
-        {format(new Date(date), 'dd MMMM yyyy, EEEE')}
-      </p>
+      <p className="date">Date: {date}</p>
     </li>
   )
 }
 
-export default AppointmentItem
+export default AppointmentIem
